@@ -95,6 +95,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Dark mode toggle
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  if (darkModeToggle) {
+    // Dark mode é padrão, exceto se o usuário salvou "false"
+    const darkPref = localStorage.getItem("darkMode");
+    if (darkPref === null || darkPref === "true") {
+      document.body.classList.add("dark-mode");
+      darkModeToggle.textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      darkModeToggle.textContent = "🌙";
+    }
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      darkModeToggle.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark);
+    });
+  }
+
   // Initialize app
   fetchActivities();
 });

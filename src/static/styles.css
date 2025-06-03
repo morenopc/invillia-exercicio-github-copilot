@@ -16,6 +16,7 @@ body {
 }
 
 header {
+  position: relative;
   text-align: center;
   padding: 20px 0;
   margin-bottom: 30px;
@@ -26,6 +27,23 @@ header {
 
 header h1 {
   margin-bottom: 10px;
+}
+
+/* Botão de dark mode no topo direito */
+#dark-mode-toggle {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.2s;
+  z-index: 2;
+}
+#dark-mode-toggle:hover {
+  color: #ffd600;
 }
 
 main {
@@ -55,6 +73,11 @@ section h3 {
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
   color: #1a237e;
+}
+
+body.dark-mode section h3 {
+  color: #fff; /* cor clara para títulos no dark mode */
+  border-bottom: 1px solid #444;
 }
 
 .activity-card {
@@ -88,6 +111,10 @@ section h3 {
 .activity-card h4 {
   margin-bottom: 10px;
   color: #0066cc;
+}
+
+body.dark-mode .activity-card h4 {
+  color: #90caf9;
 }
 
 .activity-card p {
@@ -161,4 +188,58 @@ footer {
   margin-top: 30px;
   padding: 20px;
   color: #666;
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-color: #181a20;
+  color: #e0e0e0;
+}
+body.dark-mode header {
+  background-color: #23263a;
+  color: #fff;
+}
+body.dark-mode section {
+  background-color: #23263a;
+  color: #e0e0e0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+body.dark-mode .activity-card {
+  background-color: #23263a;
+  border-color: #33384d;
+}
+body.dark-mode .activity-card h4 {
+  color: #90caf9;
+}
+body.dark-mode .activity-card li {
+  color: #e0e0e0;
+}
+body.dark-mode .activity-card p {
+  color: #b0bec5;
+}
+body.dark-mode button,
+body.dark-mode #dark-mode-toggle {
+  background-color: #3949ab;
+  color: #fff;
+}
+body.dark-mode button:hover {
+  background-color: #222b5a;
+}
+body.dark-mode .success {
+  background-color: #244b2f;
+  color: #a5d6a7;
+  border-color: #388e3c;
+}
+body.dark-mode .error {
+  background-color: #4a2323;
+  color: #ef9a9a;
+  border-color: #c62828;
+}
+body.dark-mode .info {
+  background-color: #1e2a32;
+  color: #bee5eb;
+  border-color: #0c5460;
+}
+body.dark-mode footer {
+  color: #888;
 }
