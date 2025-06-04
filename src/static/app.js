@@ -20,11 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Monta a lista de participantes inscritos
+        let participantsHtml = "";
+        if (details.participants.length > 0) {
+          participantsHtml = `
+            <p><strong>Inscritos:</strong></p>
+            <ul>
+              ${details.participants.map(email => `<li>${email}</li>`).join("")}
+            </ul>
+          `;
+        } else {
+          participantsHtml = `<p><strong>Inscritos:</strong> Nenhum inscrito ainda.</p>`;
+        }
+
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          ${participantsHtml}
         `;
 
         activitiesList.appendChild(activityCard);
@@ -80,6 +94,26 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error signing up:", error);
     }
   });
+
+  // Dark mode toggle
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  if (darkModeToggle) {
+    // Dark mode é padrão, exceto se o usuário salvou "false"
+    const darkPref = localStorage.getItem("darkMode");
+    if (darkPref === null || darkPref === "true") {
+      document.body.classList.add("dark-mode");
+      darkModeToggle.textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      darkModeToggle.textContent = "🌙";
+    }
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      darkModeToggle.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark);
+    });
+  }
 
   // Initialize app
   fetchActivities();
